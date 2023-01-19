@@ -35,7 +35,7 @@ jobs:
         uses: ./.github/actions/kubelogin
         with:
           cluster-name: ${{ secrets.cluster_name }}
-          cluster-namespace: 'default'
+          cluster-namespace: 'azure-vote'
           resource-group: ${{ secrets.resource_group }}
 
       - name: Set AKS context
@@ -50,7 +50,7 @@ jobs:
         id: deploy-aks
         uses: Azure/k8s-deploy@v4
         with:
-          namespace: 'default'
+          namespace: 'azure-vote'
           manifests: |
              azure-vote-all-in-one-redis.yaml
           images: '${{ secrets.registry }}.azurecr.io/${{ secrets.repository }}/azure-vote-front:${{ github.sha }}'
